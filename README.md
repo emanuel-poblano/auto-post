@@ -44,3 +44,86 @@ auto-post/
 ├── .env                 # Environment variables (API keys)
 └── requirements.txt     # Python dependencies
 ```
+
+--
+
+## 🔹 Setup & Installation
+
+- Clone repository 
+
+```bash
+git clone https://github.com/yourusername/auto-post.git
+cd auto-post
+```
+- Create virtual environment
+
+```bash
+python3 -m venv venv
+source venv/bin/activate  # macOS/Linux
+venv\Scripts\activate     # Windows
+```
+
+- Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+- Create .env with your social media credentials: 
+
+```bash
+TWITTER_API_KEY=your_api_key
+TWITTER_API_SECRET=your_api_secret
+TWITTER_ACCESS_TOKEN=your_access_token
+TWITTER_ACCESS_SECRET=your_access_secret
+```
+
+- Add content to ```content/posts.txt``` (one post per line)
+
+## 🔹 Usage
+
+- Post a single tweet
+
+```bash
+python main.py
+```
+
+- Schedule posts
+- Edit ```scheduler.py```
+
+```bash
+import schedule
+import time
+from poster.twitter import post_to_twitter
+
+def job():
+    post_to_twitter("Scheduled tweet from Python bot 🤖")
+
+schedule.every().day.at("10:00").do(job)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+```
+
+- Run:
+
+```bash
+python scheduler.py
+```
+
+## 🔹 Logging
+
+- Successful and failed posts are recorded in ```logs/post.log```
+- Use logging to track errors, retries, or API issues
+
+## 🔹 Future Improvements
+
+- Add AI-generated captions using OpenAI API
+- Extend to Instagram, LinkedIn, or TikTok
+- Add media upload support (images/videos)
+- Build a dashboard for scheduling and analytics
+
+## 🔹 License
+
+MIT License © Emanuel Poblano
